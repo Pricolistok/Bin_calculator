@@ -3,6 +3,31 @@ from PyQt5.Qt import *
 from logic import work_with_row
 
 
+class Creator(QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.window_about_creator = QWidget()
+        self.window_about_creator.resize(400, 200)
+        textbox_about_creator = QLabel(self.window_about_creator)
+        textbox_about_creator.setText("Доколин Георгий ИУ7-22Б")
+        textbox_about_creator.move(50, 60)
+        textbox_about_creator.setFont(QFont('Comfortaa', 18))
+        self.window_about_creator.show()
+
+
+class Calc(QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.window_about_creator = QWidget()
+        self.window_about_creator.resize(500, 200)
+        textbox_about_creator = QLabel(self.window_about_creator)
+        textbox_about_creator.setText("Приложение умножает, складывает, \nвычитает числа в двоичной "
+                                      "\nсистеме счисления")
+        textbox_about_creator.move(2, 40)
+        textbox_about_creator.setFont(QFont('Comfortaa', 18))
+        self.window_about_creator.show()
+
+
 class App(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -12,12 +37,14 @@ class App(QWidget):
         type_font = 'Comfortaa'
         self.grid = QGridLayout(self.window)
         self.menubar = QMenuBar(self.window)
-        self.menubar.setGeometry(0, 0, 500, 25)
-        file = self.menubar.addMenu('orjej')
-        file.addAction('ewou')
+        self.grid.addWidget(self.menubar)
+        inform = self.menubar.addMenu('INFO')
+        inform.addAction('About creator').triggered.connect(self.about_creator_func)
+        inform.addAction('About programm').triggered.connect(self.about_programm_func)
         font_size = 18
         self.row_for_calc = ''
         size_x, size_y = 60, 60
+
         self.row_input = QLineEdit()
         self.row_input.setFixedSize(260, 40)
         self.row_input.setFont(QFont(type_font, font_size))
@@ -155,8 +182,12 @@ class App(QWidget):
         self.row_for_calc = self.row_input.text()[0:-1]
         self.row_input.setText(self.row_for_calc)
 
-    def info_about(self):
-        print('ihhj')
+    def about_creator_func(self):
+        self.creator_inform = Creator()
+
+    def about_programm_func(self):
+        self.programm_inform = Calc()
+
 
 
 def main():

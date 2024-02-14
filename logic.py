@@ -38,9 +38,9 @@ def slice_num(num):
 
 def to_second_ss(num):
     before_dot, end_dot = slice_num(num)
-    sign = '0'
+    sign = ''
     if before_dot < 0:
-        sign = '1'
+        sign = '-'
     before_dot = abs(before_dot)
     save_quotient = []
     result_end = ''
@@ -60,5 +60,7 @@ def to_second_ss(num):
         before_dot //= 2
     if result_end == '':
         result_end = '0'
+    if result_before == '':
+        result_before = '0'
     print(str(sign + (7 - len(result_before)) * '0' + result_before + '.' + result_end))
-    return str(sign + (7 - len(result_before)) * '0' + result_before + '.' + result_end)
+    return str(sign + result_before + '.' + result_end)
